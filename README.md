@@ -19,10 +19,14 @@ Users can upload ZIP files containing *noisy images* and *corresponding `.npy` m
 ## 🖼️ Application Preview
 
 ### 🔹 Upload Page
-![Upload UI](static/images/UI.png)
+<p align="center">
+<img src="UI.png" alt="UI">
+</p>
 
 ### 🔹 Mask Visualization
-![Mask Viewer](static/images/Mask_view.png)
+<p align="center">
+<img src="Mask_view" alt="Mask_view">
+</p>
 
 ---
 
