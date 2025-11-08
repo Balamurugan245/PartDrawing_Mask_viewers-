@@ -106,14 +106,3 @@ Then open your browser and go to:
 - **Kaviya** — [GitHub Profile](https://github.com/kaviyarajasekaran/Partdrawing_Mask-Viewer)
 
 ---
-
-## 📜 License
-
-This project is licensed under the **MIT License** — feel free to use, modify, and share.
-
----
-
-✅ After saving this file, run these commands:
-git add README.md
-git commit -m "Added final formatted README with authors and screenshots"
-git push
