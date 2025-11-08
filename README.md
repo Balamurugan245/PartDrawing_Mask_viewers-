@@ -25,7 +25,7 @@ Users can upload ZIP files containing *noisy images* and *corresponding `.npy` m
 
 ### 🔹 Mask Visualization
 <p align="center">
-<img src="Mask_view" alt="Mask_view">
+<img src="Mask_view.png" alt="Mask_view">
 </p>
 
 ---
