@@ -31,7 +31,7 @@ Users can upload ZIP files containing *noisy images* and *corresponding `.npy` m
 ---
 
 ## 🏗️ Project Structure
-
+```
 PartDrawing_Mask_viewers-/
 │
 ├── app.py                 # Flask backend server
@@ -44,8 +44,8 @@ PartDrawing_Mask_viewers-/
 │   ├── uploads/           # Auto-created for temporary uploads
 │   └── css/, js/ (optional)
 └── README.md
+```
 
----
 
 ## ⚙️ Installation & Setup
 
