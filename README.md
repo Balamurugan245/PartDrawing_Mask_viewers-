@@ -52,9 +52,6 @@ Select and erase unwanted things manually
 <img src="Edit page.png" alt="User Interface">
 </p>
 
-# License
-This project is open for educational and personal use.  
-
 ## 👨‍💻 Authors
 
 - **Balamurugan** — [GitHub Profile](https://github.com/Balamurugan245)  
