@@ -33,22 +33,17 @@ Mask website/
 2. Use the **Eraser Tool** page to upload drawings and erase unwanted parts.  
    Click **Save** to store changes or **Save As** to download all edited files.
 
-# Homepage
-Two tool are available
-<p align="center">
-<img src="index.png" alt="User Interface">
-</p>
 
 # Upload Section
 Users can upload ZIP files containing noisy images and masks.
 <p align="center">
-<img src="Noisy img.png" alt="User Interface">
+<img src="UI.png" alt="User Interface">
 </p>
 
 # Image + Mask Viewer
 View part drawings with corresponding colored mask overlays.
 <p align="center">
-<img src="Mask img.png" alt="Mask viewer">
+<img src="Mask.png" alt="Mask viewer">
 </p>
 
 # Segmentation
