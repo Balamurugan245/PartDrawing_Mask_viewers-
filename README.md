@@ -43,7 +43,7 @@ Users can upload ZIP files containing noisy images and masks.
 # Image + Mask Viewer
 View part drawings with corresponding colored mask overlays.
 <p align="center">
-<img src="Mask.png" alt="Mask viewer">
+<img src="mask.png" alt="Mask viewer">
 </p>
 
 # Segmentation
