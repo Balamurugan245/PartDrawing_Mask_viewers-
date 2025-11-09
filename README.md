@@ -8,7 +8,7 @@ A clean and user-friendly web application to **view part drawing masks** and **e
 -  **Select & Delete:** Choose areas to erase precisely (like MS Paint).  
 -  Save edited images or export all files together.  
 -  Smooth scrolling, modern UI, and responsive layout.
-- 
+-  **Select & Delete:** Choose areas to erase Unwanted mask
 ## Tech Stack
 - **HTML5**  
 - **CSS3** (modern layout & styling)  
@@ -16,7 +16,7 @@ A clean and user-friendly web application to **view part drawing masks** and **e
 
 # Folder Structure
 Mask website/
-├── index.html # Mask Viewer page
+├── index.html # Mask Viewer & remover page
 ├── clean.html # Eraser Tool page
 ├── app.py # Flask backend
 ├── static/
@@ -43,13 +43,19 @@ Users can upload ZIP files containing noisy images and masks.
 # Image + Mask Viewer
 View part drawings with corresponding colored mask overlays.
 <p align="center">
-<img src="mask.png" alt="Mask viewer">
+<img src="Mask_view.png" alt="Mask viewer">
 </p>
 
 # Segmentation
 Select and erase unwanted things manually
 <p align="center">
 <img src="Edit page.png" alt="User Interface">
+</p>
+
+# Removing unwanted Mask
+View part drawings with corresponding colored mask overlays.
+<p align="center">
+<img src="Mask_remove.png" alt="Mask viewer">
 </p>
 
 ## 👨‍💻 Authors
