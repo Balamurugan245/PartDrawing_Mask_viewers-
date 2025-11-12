@@ -78,7 +78,7 @@
 
     h2 {
       font-size: 26px;
-      color: #0a3d62;
+      color: #e6e8e9;
       margin-bottom: 10px;
     }
 
@@ -155,7 +155,6 @@
       box-shadow: 0 3px 15px rgba(0,0,0,0.15);
       max-width: 100%;
       height: auto;
-      cursor: crosshair;
     }
 
     #overlayCanvas {
@@ -223,63 +222,192 @@
       margin-top: 25px;
       display: none;
     }
-    /* ===== RIGHT TOOLBAR (icons only) ===== */
-#toolbox {
+    /* ===== FLOATING TOOL BUTTONS (Right Side) ===== */
+/* floating Tools: vertical pills with icon on top, label below */
+.floating-tools {
   position: fixed;
-  top: 200px;
-  right: 220px;
+  top: 65%;
+  right: 24px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 18px;
-  z-index: 999;
+  gap: 14px;
+  z-index: 1000;
+  transform: translateY(-50%);
 }
 
-/* Tool buttons same as Next/Prev */
-.tool-btn {
-  background: linear-gradient(135deg, #0a3d62, #1e5a8b);
-  border: none;
-  border-radius: 12px;
-  width: 60px;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-/* Hover + click animation */
-.tool-btn:hover {
-  background: linear-gradient(135deg, #0e4c7f, #0a3d62);
-  transform: scale(1.08);
-}
-.tool-btn:active {
-  transform: scale(0.95);
-}
-
-/* Icon styling */
-.material-icons {
-  font-size: 28px;
+.tool-btn.active {
+  background-color: #d9534f;
   color: #fff;
 }
 
-/* Active eraser highlight */
-.tool-btn.eraser-active {
-  background: linear-gradient(135deg, #b91d1d, #e33636);
-  box-shadow: 0 4px 18px rgba(200, 0, 0, 0.4);
+
+.tool-btn {
+  width: 64px;
+  height: 64px;
+  background: #fff;
+  color: #0a3d62;
+  border: 2px solid rgba(10,61,98,0.06);
+  padding: 6px;
+  border-radius: 14px;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.18);
+  transition: all 0.18s ease;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:4px;
+  text-align:center;
 }
+
+.tool-btn div { line-height:1; }
+
+.tool-btn:hover {
+  background: #0a3d62;
+  color: #fff;
+  transform: translateX(-4px);
+}
+
+/* hide the tools until the viewer is scrolled into view (optional: small fade-in) */
+#editTools[style*="display:none"] { opacity: 0; pointer-events: none; }
+#editTools[style*="display:flex"] { opacity: 1; transition: opacity 220ms ease-in; pointer-events: auto; }
+
+
+.tool-btn:hover {
+  background: #0a3d62;
+  color: #fff;
+  transform: scale(1.05);
+}
+#tools {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  display: flex;
+  gap: 8px;
+  z-index: 100;
+}
+
+.zoom-controls {
+  position: fixed;
+  top: 45%;
+  left: 24px;
+  transform: translateY(-50%);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 10px;
+  border-radius: 14px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.18);
+}
+.zoom-controls button {
+  border: none;
+  background: #0a3d62;
+  color: #fff;
+  font-size: 18px;
+  border-radius: 10px;
+  padding: 8px 10px;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+.zoom-controls button:hover {
+  background: #164d7a;
+  transform: scale(1.05);
+}
+#zoomLevel {
+  font-weight: 700;
+  color: #0a3d62;
+  font-size: 14px;
+}
+.back-btn {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  background-color: #444;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-weight: bold;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+.back-btn:hover {
+  background-color: #222;
+  cursor: pointer;
+}
+/* Navigation buttons (Next / Previous) */
+/* === Viewer Page Layout === */
+body.viewer-active {
+  margin: 0;
+  height: 100vh;
+  overflow: hidden;
+  background: linear-gradient(to bottom, #0b3d6b, #6e8ea5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Hide the top header when viewing image */
+body.viewer-active header,
+body.viewer-active .logo,
+body.viewer-active h1 {
+  display: none !important;
+}
+
+/* Center image and controls vertically */
+/* Next/Previous buttons */
+#navButtons {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 10px;
+}
+
+#navButtons button {
+  background-color: #0b3d6b;
+  color: white;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+#navButtons button:hover {
+  background-color: #155a9c;
+}
+
+/* Fixed back button at bottom-left corner */
+.back-btn {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  background-color: #0b3d6b;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
   </style>
 </head>
 <body>
   <header>
-    <img src="static/images/com logo.jpg" alt="ALFA TKG Logo">
+    <img src="static\images\com logo.jpg" alt="ALFA TKG Logo">
     <h1>Partdrawing Mask Viewer</h1>
   </header>
 
-  <div class="container">
+  <div class="container" id="uploadSection">
     <h2>Upload ZIP Files</h2>
     <p>Upload one ZIP of noisy images and one ZIP of corresponding mask (.npy) files.</p>
 
@@ -301,54 +429,73 @@
 
   <div id="viewer">
     <h2>Image Preview</h2>
-
-<!-- RIGHT TOOLBAR (Icons only) -->
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-<div id="toolbox">
-  <button class="tool-btn" id="eraserToggle" title="Eraser">
-    <span class="material-icons">brush</span>
-  </button>
-
-  <button class="tool-btn" id="undoBtn" title="Undo">
-    <span class="material-icons">undo</span>
-  </button>
-
-  <button class="tool-btn" id="redoBtn" title="Redo">
-    <span class="material-icons">redo</span>
-  </button>
-
-  <button class="tool-btn" id="saveBtn" title="Save">
-    <span class="material-icons">save</span>
-  </button>
-
-  <button class="tool-btn" id="saveAllBtn" title="Save All">
-    <span class="material-icons">folder</span>
-  </button>
-
-  <button class="tool-btn" id="exportBtn" title="Export ZIP">
-    <span class="material-icons">archive</span>
-  </button>
-</div>
+    <button id="backBtn" class="btn back-btn">⬅ Back to Upload</button>
     <div class="viewer">
       <div class="canvas-wrapper">
         <canvas id="baseCanvas"></canvas>
         <canvas id="overlayCanvas"></canvas>
       </div>
     </div>
-
-    <div class="status">
-      <span id="counter">Image 0 of 0</span> · <span id="fileName">None</span> · Active Mask: <span id="maskLabel">None</span>
+    <div id="navButtons" class="nav-btns" style="display:none;">
+      <button id="prevBtn"> Previous</button>
+      <button id="nextBtn">Next </button>
     </div>
-
-    <div style="margin-top:12px;">
-      <button id="prevBtn" style="display:none;" class="btn">Previous Image</button>
-      <button id="nextBtn" style="display:none;" class="btn">Next Image</button>
-    </div>
-
   </div>
+  <div id="editTools" class="floating-tools" style="display:none;">
+  <button id="undo-btn" class="tool-btn" title="Undo Last Action">
+    <div style="font-size:18px;line-height:1">↩</div>
+    <div style="font-size:13px;margin-top:6px">Undo</div>
+  </button>
+
+  <button id="save-btn" class="tool-btn" title="Save">
+    <div style="font-size:18px;line-height:1">💾</div>
+    <div style="font-size:13px;margin-top:6px">Save</div>
+  </button>
+
+  <button id="saveas-btn" class="tool-btn" title="Save As">
+    <div style="font-size:18px;line-height:1">📁</div>
+    <div style="font-size:13px;margin-top:6px">Save As</div>
+  </button>
+
+  <button id="remove-btn" class="tool-btn" title="Remove Mask">
+    <div style="font-size:18px;line-height:1">🩸</div>
+    <div style="font-size:13px;margin-top:6px">Remove</div>
+  </button>
+
+  <button id="redo-btn" class="tool-btn" title="Redo Action">
+    <div style="font-size:18px;line-height:1">↪</div>
+    <div style="font-size:13px;margin-top:6px">Redo</div>
+  </button>
+  <button id="eraserBtn" class="tool-btn">🧽 Erase Mode</button>
+  <label id="eraserSizeLabel" for="eraserSize" style="color:white;margin-left:10px;">Eraser_Size:</label>
+  <input type="range" id="eraserSize" min="5" max="60" value="20" style="width:120px;">
+</div>
+<div id="zoomControls" class="zoom-controls" style="display:none;">
+  <button id="zoomInBtn" title="Zoom In">＋</button>
+  <span id="zoomLevel">100%</span>
+  <button id="zoomOutBtn" title="Zoom Out">－</button>
+</div>
 
   <script>
+    document.addEventListener("DOMContentLoaded", () => {
+  const storedPairs = localStorage.getItem("uploadedPairs");
+  if (storedPairs) {
+    imagesData = JSON.parse(storedPairs);
+    currentIndex = 0;
+    document.getElementById("uploadSection").style.display = "none";
+    document.getElementById("viewer").style.display = "block";
+    document.getElementById("editTools").style.display = "flex";
+    document.getElementById("zoomControls").style.display = "flex";
+    showImage(currentIndex);
+    const multiple = imagesData.length > 1;
+    nextBtn.style.display = multiple ? "inline-block" : "none";
+    prevBtn.style.display = multiple ? "inline-block" : "none";
+    viewer.scrollIntoView({ behavior: 'smooth' });
+    document.getElementById("editTools").style.display = "flex";
+    document.getElementById("navButtons").style.display = "flex";
+  }
+});
+
   const form = document.getElementById('uploadForm');
   const errorBox = document.getElementById('error');
   const viewer = document.getElementById('viewer');
@@ -358,20 +505,19 @@
   const uploadBtn = document.getElementById('uploadBtn');
   const nextBtn = document.getElementById('nextBtn');
   const prevBtn = document.getElementById('prevBtn');
-  const counter = document.getElementById('counter');
-  const fileNameLabel = document.getElementById('fileName');
-  const eraserToggle = document.getElementById('eraserToggle');
-  const undoBtn = document.getElementById('undoBtn');
-  const redoBtn = document.getElementById('redoBtn');
-  const saveBtn = document.getElementById('saveBtn');
-  const saveAllBtn = document.getElementById('saveAllBtn');
-  const exportBtn = document.getElementById('exportBtn');
+  const removeBtn = document.getElementById('remove-btn');
+  const undoBtn = document.getElementById('undo-btn');
+  const redoBtn = document.getElementById('redo-btn');
 
-  let imagesData = [];   // array of objects received from server {noisy_url, label_url, width, height, name, num_masks}
+  let selectedLabel = -1;
+  let undoStack = [];
+  let redoStack = [];
+
+  let imagesData = [];
   let currentIndex = 0;
-  let overlayCtx, W, H;
+  let labelData = null, W, H, overlayCtx;
 
-
+  // Show errors safely
   function showError(msg) {
     errorBox.textContent = msg;
     console.error("❌ Error:", msg);
@@ -380,83 +526,74 @@
     errorBox.textContent = '';
   }
 
-  // === Handle Form Submit (upload => server processes zip and returns pairs) ===
-  form.onsubmit = async (e) => {
-    e.preventDefault();
-    clearError();
+  // === Handle Form Submit ===
+form.onsubmit = async (e) => {
+  e.preventDefault();
+  clearError();
 
-    const noisyZip = document.getElementById('noisy_zip').files[0];
-    const maskZip = document.getElementById('mask_zip').files[0];
+  const noisyZip = document.getElementById('noisy_zip').files[0];
+  const maskZip = document.getElementById('mask_zip').files[0];
 
-    if (!noisyZip || !maskZip) {
-      showError("Please upload both ZIP files.");
-      return;
-    }
+  if (!noisyZip || !maskZip) {
+    showError("Please upload both ZIP files.");
+    return;
+  }
 
-    const fd = new FormData();
-    fd.append("noisy_zip", noisyZip);
-    fd.append("mask_zip", maskZip);
+  const fd = new FormData();
+  fd.append("noisy_zip", noisyZip);
+  fd.append("mask_zip", maskZip);
 
-    uploadBtn.disabled = true;
-    uploadBtn.textContent = "Processing...";
+  uploadBtn.disabled = true;
+  uploadBtn.textContent = "Processing...";
+
+  try {
+    const res = await fetch("/upload", { method: "POST", body: fd });
+    const text = await res.text();
+    let data;
 
     try {
-      const res = await fetch("/upload", { method: "POST", body: fd });
-      const text = await res.text();
-      let data;
-      try {
-        data = JSON.parse(text);
-      } catch {
-        throw new Error("Server returned invalid JSON:\n" + text.slice(0, 150));
-      }
-      if (!res.ok || data.error) throw new Error(data.error || "Upload failed on server.");
-
-      imagesData = Array.isArray(data) ? data : data.pairs || [];
-      if (imagesData.length === 0) {
-        throw new Error("No valid image/mask pairs found.");
-      }
-
-      // Initialize per-image client state
-      for (let i=0;i<imagesData.length;i++) {
-        imagesData[i].labelData = null;
-        imagesData[i].originalLabelData = null;
-        imagesData[i].undoStack = [];
-        imagesData[i].redoStack = [];
-        imagesData[i].modified = false;
-        imagesData[i].baseImageDataURL = null;
-      }
-
-      currentIndex = 0;
-      await showImage(currentIndex);
-      const multiple = imagesData.length > 1;
-      nextBtn.style.display = multiple ? "inline-block" : "none";
-      prevBtn.style.display = multiple ? "inline-block" : "none";
-      viewer.style.display = 'block';
-      viewer.scrollIntoView({ behavior: 'smooth' });
-
-    } catch (err) {
-      showError(err.message);
-    } finally {
-      uploadBtn.disabled = false;
-      uploadBtn.textContent = "Upload & Preview";
+      data = JSON.parse(text);
+    } catch {
+      throw new Error("Server returned invalid JSON:\n" + text.slice(0, 150));
     }
-  };
 
-  // === Navigation ===
-  nextBtn.onclick = async () => {
-    if (imagesData.length === 0) return;
-    currentIndex = (currentIndex + 1) % imagesData.length;
-    await showImage(currentIndex);
-  };
-  prevBtn.onclick = async () => {
-    if (imagesData.length === 0) return;
-    currentIndex = (currentIndex - 1 + imagesData.length) % imagesData.length;
-    await showImage(currentIndex);
-  };
+    if (!res.ok || data.error) {
+      throw new Error(data.error || "Upload failed on server.");
+    }
 
-  // === Show Image + Load Label ===
+    // ✅ Save image/mask pairs for next page
+    const pairs = Array.isArray(data) ? data : data.pairs || [];
+    if (pairs.length === 0) throw new Error("No valid image/mask pairs found.");
+
+    localStorage.setItem("uploadedPairs", JSON.stringify(pairs));
+
+    // ✅ Go to viewer page
+    window.location.href = "/viewer";
+
+  } catch (err) {
+    showError(err.message);
+  } finally {
+    uploadBtn.disabled = false;
+    uploadBtn.textContent = "Upload & Preview";
+  }
+};
+
+  // === Next Button ===
+nextBtn.onclick = async () => {
+  if (imagesData.length === 0) return;
+  currentIndex = (currentIndex + 1) % imagesData.length;
+  await showImage(currentIndex);
+};
+
+  // === Previous Button ===
+prevBtn.onclick = async () => {
+  if (imagesData.length === 0) return;
+  currentIndex = (currentIndex - 1 + imagesData.length) % imagesData.length;
+  await showImage(currentIndex);
+};
+
+  // === Show Image + Mask ===
   async function showImage(index) {
-    clearError();
     const data = imagesData[index];
     if (!data.noisy_url || !data.label_url) {
       showError("Missing image or mask URL for index " + index);
@@ -465,33 +602,23 @@
 
     W = data.width || 512;
     H = data.height || 512;
-    overlayCanvas.width = W;
-    overlayCanvas.height = H;
-    baseCanvas.width = W;
-    baseCanvas.height = H;
-    overlayCtx = overlayCanvas.getContext('2d');
+    viewer.style.display = 'block';
 
-    // draw base noisy image then load label
-    await drawImageToCanvas(baseCanvas, data.noisy_url, W, H);
-
-    // store baseImageDataURL
-    imagesData[index].baseImageDataURL = baseCanvas.toDataURL("image/png");
-
-    await parseLabelImageToArray(data.label_url, index);
-    updateUI();
-    setupHover(); // rebind hover for new image
+    await drawImage(baseCanvas, data.noisy_url, W, H);
+    await parseLabelImage(data.label_url);
   }
 
-  function drawImageToCanvas(canvas, url, W, H) {
+  function drawImage(canvas, url, W, H) {
     return new Promise((resolve, reject) => {
       const img = new Image();
-      img.crossOrigin = "anonymous";
       img.onload = () => {
         canvas.width = W;
         canvas.height = H;
         const ctx = canvas.getContext('2d');
-        ctx.clearRect(0,0,W,H);
         ctx.drawImage(img, 0, 0, W, H);
+        overlayCanvas.width = W;
+        overlayCanvas.height = H;
+        overlayCtx = overlayCanvas.getContext('2d');
         resolve();
       };
       img.onerror = () => reject(new Error("Failed to load image: " + url));
@@ -499,321 +626,341 @@
     });
   }
 
-  function parseLabelImageToArray(url, index) {
+  function parseLabelImage(url) {
     return new Promise((resolve, reject) => {
       const img = new Image();
-      img.crossOrigin = "anonymous";
       img.onload = () => {
-        // draw to temporary canvas, read red channel (L image)
         const tmp = document.createElement('canvas');
-        tmp.width = W; tmp.height = H;
+        tmp.width = W;
+        tmp.height = H;
         const ctx = tmp.getContext('2d');
         ctx.drawImage(img, 0, 0, W, H);
-        const pixels = ctx.getImageData(0,0,W,H).data;
-        const labelData = new Uint8Array(W * H);
-        for (let i=0,j=0; j < labelData.length; j++, i+=4) {
-          labelData[j] = pixels[i]; // red channel
-        }
-        imagesData[index].labelData = labelData;
-        imagesData[index].originalLabelData = labelData.slice(); // copy
-        imagesData[index].undoStack = [];
-        imagesData[index].redoStack = [];
-        imagesData[index].modified = false;
+        const pixels = ctx.getImageData(0, 0, W, H).data;
+        labelData = new Uint16Array(W * H);
+        for (let i = 0, j = 0; j < labelData.length; j++, i += 4)
+          labelData[j] = pixels[i];
+        setupHover();
         resolve();
       };
       img.onerror = () => reject(new Error("Failed to load mask: " + url));
       img.src = url + "?v=" + Date.now();
     });
   }
+  // Create consistent distinct colors per label ID
+function getColorForLabel(label) {
+  const r = (label * 37) % 255;
+  const g = (label * 91) % 255;
+  const b = (label * 53) % 255;
+  return [r, g, b];
+}
 
-  function updateUI() {
-    counter.textContent = `Image ${currentIndex+1} of ${imagesData.length}`;
-    fileNameLabel.textContent = imagesData[currentIndex].name || 'Unknown';
-    maskLabel.textContent = 'None';
-    undoBtn.disabled = imagesData[currentIndex].undoStack.length === 0;
-    redoBtn.disabled = imagesData[currentIndex].redoStack.length === 0;
-  }
-
-  // === Hover Highlight (unchanged functionality) ===
-  function setupHover() {
-    let current = -1;
-    baseCanvas.onmousemove = (e) => {
-      const rect = baseCanvas.getBoundingClientRect();
-      const x = Math.floor((e.clientX - rect.left) * (W / rect.width));
-      const y = Math.floor((e.clientY - rect.top) * (H / rect.height));
-      const idx = y * W + x;
-      const label = imagesData[currentIndex].labelData ? imagesData[currentIndex].labelData[idx] : 0;
-      if (label !== current) {
-        current = label;
-        overlayCtx.clearRect(0, 0, W, H);
-        maskLabel.textContent = label || 'None';
-        if (label > 0) highlightMask(label);
-      }
-    };
-    baseCanvas.onmouseleave = () => {
-      overlayCtx.clearRect(0, 0, W, H);
-      maskLabel.textContent = 'None';
-    };
-
-    // click handling for eraser
-    baseCanvas.onclick = (e) => {
-      if (eraserToggle.dataset.on === "1") {
-        handleEraserClick(e);
-      }
-    };
-  }
-
-  function highlightMask(id) {
-    const imgData = overlayCtx.createImageData(W, H);
-    const [r, g, b] = colorForID(id);
-    const labelData = imagesData[currentIndex].labelData;
-    for (let i = 0; i < labelData.length; i++) {
-      if (labelData[i] === id) {
-        const k = i * 4;
-        imgData.data[k] = r;
-        imgData.data[k + 1] = g;
-        imgData.data[k + 2] = b;
-        imgData.data[k + 3] = 130;
-      }
+  function highlightMask(label) {
+  const [r, g, b] = getColorForLabel(label);
+  const imgData = overlayCtx.createImageData(W, H);
+  for (let i = 0; i < labelData.length; i++) {
+    if (labelData[i] === label) {
+      const k = i * 4;
+      imgData.data[k] = r;
+      imgData.data[k + 1] = g;
+      imgData.data[k + 2] = b;
+      imgData.data[k + 3] = 150; // translucent overlay
     }
-    overlayCtx.putImageData(imgData, 0, 0);
   }
+  overlayCtx.putImageData(imgData, 0, 0);
+}
 
-  function colorForID(id) {
-    return [(id * 91) % 255, (id * 53) % 255, (id * 31) % 255];
-  }
 
-  // === Eraser logic (user chose option 1: remove entire mask ID) ===
-  eraserToggle.dataset.on = "0";
-  eraserToggle.onclick = () => {
-    const on = eraserToggle.dataset.on === "1";
-    eraserToggle.dataset.on = on ? "0" : "1";
-    eraserToggle.textContent = `Eraser: ${on ? 'OFF' : 'ON'}`;
-    eraserToggle.style.background = on ? '' : '#ffdede';
-  };
+// Remember hovered mask ID
+function setupHover() {
+  let currentHover = -1;
 
-  function pushUndoState() {
-    const idx = currentIndex;
-    const state = {
-      labelData: imagesData[idx].labelData.slice(),
-      baseDataURL: baseCanvas.toDataURL("image/png")
-    };
-    imagesData[idx].undoStack.push(state);
-    imagesData[idx].redoStack = []; // clear redo on new action
-    imagesData[idx].modified = true;
-    updateUI();
-  }
-
-  function handleEraserClick(e) {
+  baseCanvas.onmousemove = (e) => {
     const rect = baseCanvas.getBoundingClientRect();
     const x = Math.floor((e.clientX - rect.left) * (W / rect.width));
     const y = Math.floor((e.clientY - rect.top) * (H / rect.height));
-    const idx = y * W + x;
-    const label = imagesData[currentIndex].labelData[idx];
-    if (!label || label === 0) return;
-
-    // push current state for undo
-    pushUndoState();
-
-    // Remove entire mask id across the labelData and update base image to white
-    const labelData = imagesData[currentIndex].labelData;
-    const baseCtx = baseCanvas.getContext('2d');
-    const baseImgData = baseCtx.getImageData(0,0,W,H);
-    let changed = false;
-    for (let i = 0; i < labelData.length; i++) {
-      if (labelData[i] === label) {
-        labelData[i] = 0;
-        const k = i * 4;
-        baseImgData.data[k] = 255;     // R
-        baseImgData.data[k+1] = 255;   // G
-        baseImgData.data[k+2] = 255;   // B
-        // keep alpha as-is
-        changed = true;
-      }
-    }
-    if (changed) {
-      baseCtx.putImageData(baseImgData, 0, 0);
-      // update overlay (clear + no highlight)
-      overlayCtx.clearRect(0,0,W,H);
-      maskLabel.textContent = 'None';
-      // mark modified and push baseImageDataURL
-      imagesData[currentIndex].baseImageDataURL = baseCanvas.toDataURL("image/png");
-      imagesData[currentIndex].modified = true;
-      updateUI();
-    }
-  }
-
-  // === Undo / Redo ===
-  undoBtn.onclick = () => {
-    const idx = currentIndex;
-    const st = imagesData[idx].undoStack.pop();
-    if (!st) return;
-    // push current to redo
-    const currentState = {
-      labelData: imagesData[idx].labelData.slice(),
-      baseDataURL: baseCanvas.toDataURL("image/png")
-    };
-    imagesData[idx].redoStack.push(currentState);
-
-    // restore labelData and base image
-    imagesData[idx].labelData = st.labelData.slice();
-    restoreBaseImageFromDataURL(st.baseDataURL).then(()=>{
-      overlayCtx.clearRect(0,0,W,H);
-      imagesData[idx].modified = true;
-      updateUI();
-    });
-  };
-
-  redoBtn.onclick = () => {
-    const idx = currentIndex;
-    const st = imagesData[idx].redoStack.pop();
-    if (!st) return;
-    // push current to undo
-    const currentState = {
-      labelData: imagesData[idx].labelData.slice(),
-      baseDataURL: baseCanvas.toDataURL("image/png")
-    };
-    imagesData[idx].undoStack.push(currentState);
-
-    imagesData[idx].labelData = st.labelData.slice();
-    restoreBaseImageFromDataURL(st.baseDataURL).then(()=>{
-      overlayCtx.clearRect(0,0,W,H);
-      imagesData[idx].modified = true;
-      updateUI();
-    });
-  };
-
-  function restoreBaseImageFromDataURL(dataURL) {
-    return new Promise((resolve) => {
-      const img = new Image();
-      img.onload = () => {
-        const ctx = baseCanvas.getContext('2d');
-        ctx.clearRect(0,0,W,H);
-        ctx.drawImage(img, 0, 0, W, H);
-        imagesData[currentIndex].baseImageDataURL = dataURL;
-        resolve();
-      };
-      img.src = dataURL;
-    });
-  }
-
-  // === Save Current ===
-  saveBtn.onclick = async () => {
-    try {
-      saveBtn.disabled = true;
-      saveBtn.textContent = "Saving...";
-      await saveCurrentImage(currentIndex);
-      saveBtn.textContent = "Saved";
-      setTimeout(()=>{ saveBtn.textContent = "Save Current"; saveBtn.disabled = false; }, 900);
-    } catch (err) {
-      showError("Save failed: " + err.message);
-      saveBtn.disabled = false;
-      saveBtn.textContent = "Save Current";
+    const label = labelData[y * W + x];
+    if (label !== currentHover) {
+      currentHover = label;
+      overlayCtx.clearRect(0, 0, W, H);
+      if (label > 0) highlightMask(label);
     }
   };
 
-  // Save all modified images by iterating calls to saveCurrentImage
-  saveAllBtn.onclick = async () => {
-    try {
-      saveAllBtn.disabled = true;
-      saveAllBtn.textContent = "Saving all...";
-      for (let i = 0; i < imagesData.length; i++) {
-        if (imagesData[i].modified) {
-          await saveCurrentImage(i);
-        }
-      }
-      saveAllBtn.textContent = "Saved all";
-      setTimeout(()=>{ saveAllBtn.textContent = "Save All"; saveAllBtn.disabled = false; }, 1200);
-    } catch (err) {
-      showError("Save all failed: " + err.message);
-      saveAllBtn.disabled = false;
-      saveAllBtn.textContent = "Save All";
+  // 🟢 Click to SELECT mask permanently
+  baseCanvas.onclick = (e) => {
+    const rect = baseCanvas.getBoundingClientRect();
+    const x = Math.floor((e.clientX - rect.left) * (W / rect.width));
+    const y = Math.floor((e.clientY - rect.top) * (H / rect.height));
+    const label = labelData[y * W + x];
+    if (label > 0) {
+      selectedLabel = label;
+      maskLabel.textContent = 'Selected Mask: ' + label;
+      overlayCtx.clearRect(0, 0, W, H);
+      highlightMask(label); // keep it colored after click
     }
   };
 
-  // export zip of server-side modified folder
-  exportBtn.onclick = async () => {
-    try {
-      exportBtn.disabled = true;
-      exportBtn.textContent = "Preparing ZIP...";
-      const res = await fetch("/export_zip");
-      if (!res.ok) throw new Error("Server failed to create ZIP.");
-      const blob = await res.blob();
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = "modified_masks_and_images.zip";
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      URL.revokeObjectURL(url);
-      exportBtn.textContent = "Export ZIP";
-      exportBtn.disabled = false;
-    } catch (err) {
-      showError("Export failed: " + err.message);
-      exportBtn.disabled = false;
-      exportBtn.textContent = "Export ZIP";
-    }
+  baseCanvas.onmouseleave = () => {
+    overlayCtx.clearRect(0, 0, W, H);
   };
-
-  // Utility: save image i by sending label bytes + base image PNG to server
-  async function saveCurrentImage(i) {
-    const item = imagesData[i];
-    if (!item) throw new Error("Invalid image index");
-    // labelData should be Uint8Array length W*H
-    const labelBlob = new Blob([item.labelData.buffer], {type: "application/octet-stream"});
-    // get base image blob from canvas (in case it's not current canvas, we need to set base canvas to that image)
-    // if saving not current index, we need to draw that image into an offscreen canvas
-    let baseBlob;
-    if (i === currentIndex) {
-      baseBlob = await new Promise(res => baseCanvas.toBlob(res, "image/png"));
-    } else {
-      // offscreen canvas
-      const tmp = document.createElement('canvas');
-      tmp.width = item.width || W;
-      tmp.height = item.height || H;
-      const ctx = tmp.getContext('2d');
-      // If we have stored baseImageDataURL, draw from it
-      if (item.baseImageDataURL) {
-        await new Promise(r => {
-          const img = new Image();
-          img.onload = () => { ctx.drawImage(img,0,0,tmp.width,tmp.height); r(); };
-          img.src = item.baseImageDataURL;
-        });
-        baseBlob = await new Promise(res => tmp.toBlob(res, "image/png"));
-      } else {
-        // fallback: fetch its noisy_url and draw
-        await new Promise(r => {
-          const img = new Image();
-          img.crossOrigin = "anonymous";
-          img.onload = () => { ctx.drawImage(img,0,0,tmp.width,tmp.height); r(); };
-          img.src = item.noisy_url + "?v=" + Date.now();
-        });
-        baseBlob = await new Promise(res => tmp.toBlob(res, "image/png"));
-      }
-    }
-
-    const fd = new FormData();
-    fd.append("name", item.name);
-    fd.append("width", item.width);
-    fd.append("height", item.height);
-    fd.append("label", labelBlob, `${item.name}.label.raw`);
-    fd.append("base_image", baseBlob, `${item.name}.noisy.png`);
-
-    const resp = await fetch("/save_mask", { method: "POST", body: fd });
-    const jtxt = await resp.text();
-    let j;
-    try { j = JSON.parse(jtxt); } catch { throw new Error("Invalid JSON response: " + jtxt.slice(0,200)); }
-    if (!resp.ok || j.error) throw new Error(j.error || "Save failed.");
-    // mark not modified (server saved)
-    item.modified = false;
-    return j;
-  }
-function toggleEraserMode() {
-    eraserEnabled = !eraserEnabled; // your existing eraser variable
-    document.getElementById("eraserToggle").style.background = eraserEnabled ? "#F24E1E" : "#2155CD";
 }
-  </script>
 
+removeBtn.onclick = () => {
+  if (selectedLabel <= 0) {
+    alert("Please hover and select a mask area first.");
+    return;
+  }
+
+  // Save current state
+  const ctx = baseCanvas.getContext('2d');
+  undoStack.push(ctx.getImageData(0, 0, W, H));
+  redoStack = [];
+
+  // Paint selected region white
+  const imgData = ctx.getImageData(0, 0, W, H);
+  for (let i = 0; i < labelData.length; i++) {
+    if (labelData[i] === selectedLabel) {
+      const k = i * 4;
+      imgData.data[k] = 255;
+      imgData.data[k + 1] = 255;
+      imgData.data[k + 2] = 255;
+      imgData.data[k + 3] = 255;
+    }
+  }
+  ctx.putImageData(imgData, 0, 0);
+  overlayCtx.clearRect(0, 0, W, H);
+  maskLabel.textContent = `Removed Mask: ${selectedLabel}`;
+};
+
+// --- Save / Save As improvements ----------------------------------------------
+const saveBtn = document.getElementById('save-btn');
+const saveAsBtn = document.getElementById('saveas-btn');
+
+function defaultFilenameForIndex(idx) {
+  try {
+    const url = imagesData[idx].noisy_url || imagesData[idx].image || '';
+    const parts = url.split('/');
+    let name = parts[parts.length - 1] || `image_${idx}.png`;
+    name = name.split('?')[0];
+    if (!name.toLowerCase().endsWith('.png')) name = name.replace(/\.\w+$/, '') + '.png';
+    return name;
+  } catch {
+    return `image_${idx}.png`;
+  }
+}
+
+// Send image (dataURL) to server. Optionally ask server to replace original path.
+async function postSaveImageToServer(dataURL, filename, replacePath = null) {
+  const fd = new FormData();
+  fd.append('image_data', dataURL);
+  fd.append('filename', filename);
+  if (replacePath) fd.append('replace_path', replacePath);
+
+  const resp = await fetch('/save_cleaned_image', { method: 'POST', body: fd });
+  return resp.json();
+}
+
+saveBtn.onclick = async () => {
+  if (!imagesData || imagesData.length === 0) { alert('No image to save'); return; }
+  try {
+    saveBtn.disabled = true;
+    const dataURL = baseCanvas.toDataURL('image/png');
+    const filename = defaultFilenameForIndex(currentIndex);
+    let replacePath = null;
+    const noisy = imagesData[currentIndex].noisy_url || imagesData[currentIndex].image || '';
+    if (noisy.includes('/static/')) {
+      replacePath = noisy.split('/static/')[1].split('?')[0]; // remove query strin
+      }
+
+    const res = await postSaveImageToServer(dataURL, filename, replacePath);
+    console.log("Saving image to:", replacePath);
+
+    if (res && res.success) {
+      if (res.saved_path) {
+        imagesData[currentIndex].noisy_url = (res.saved_url || ('/static/' + res.saved_path));
+      } else if (replacePath) {
+        imagesData[currentIndex].noisy_url = '/static/' + replacePath;
+      } else {
+        imagesData[currentIndex].noisy_url = '/static/cleaned/' + filename;
+      }
+      alert('Saved: ' + (res.filename || filename));
+    } else {
+      alert('Save failed: ' + (res && res.error ? res.error : 'unknown'));
+    }
+  } catch (err) {
+    alert('Save error: ' + err.message);
+  } finally {
+    saveBtn.disabled = false;
+  }
+};
+
+// Save As -> prompt OS save dialog by creating a Blob and anchor (download)
+saveAsBtn.onclick = async () => {
+  const zipName = prompt("Enter ZIP name:", "cleaned_images");
+  if (!zipName) return;
+
+  try {
+    const res = await fetch("/saveas_cleaned_zip", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ zip_name: zipName })
+    });
+    const data = await res.json();
+    if (data.success) {
+      const link = document.createElement("a");
+      link.href = data.download_url;
+      link.download = zipName.endsWith(".zip") ? zipName : `${zipName}.zip`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } else {
+      alert("Save As failed: " + (data.error || "unknown error"));
+    }
+  } catch (err) {
+    alert("Save As error: " + err.message);
+  }
+};
+
+undoBtn.onclick = () => {
+  const ctx = baseCanvas.getContext('2d');
+  if (undoStack.length === 0) return;
+  redoStack.push(ctx.getImageData(0, 0, W, H));
+  ctx.putImageData(undoStack.pop(), 0, 0);
+};
+
+redoBtn.onclick = () => {
+  const ctx = baseCanvas.getContext('2d');
+  if (redoStack.length === 0) return;
+  undoStack.push(ctx.getImageData(0, 0, W, H));
+  ctx.putImageData(redoStack.pop(), 0, 0);
+};
+// === Eraser Tool ===
+const overlay = document.getElementById('overlayCanvas');
+const ctxOverlay = overlay.getContext('2d');
+const eraserBtn = document.getElementById('eraserBtn');
+const eraserSizeSlider = document.getElementById('eraserSize');
+
+let eraserActive = false;
+let eraserSize = parseInt(eraserSizeSlider.value);
+let isErasing = false;
+
+// === TOGGLE ERASER MODE ===
+eraserBtn.addEventListener('click', () => {
+  eraserActive = !eraserActive;
+  eraserBtn.classList.toggle('active', eraserActive);
+  eraserBtn.textContent = eraserActive ? "🧽 Erase: ON" : "🧽 Erase Mode";
+
+  // When eraser is active → hide mask overlay
+  if (eraserActive) {
+    overlay.style.pointerEvents = "auto";
+    if (typeof selectedLabel !== "undefined") selectedLabel = -1;
+    overlayCtx.clearRect(0, 0, W, H);
+  } else {
+    overlay.style.pointerEvents = "none";
+  }
+});
+
+// === SLIDER CONTROL ===
+eraserSizeSlider.addEventListener('input', e => {
+  eraserSize = parseInt(e.target.value);
+});
+
+// === ERASING BEHAVIOR ===
+overlay.addEventListener('mousedown', e => {
+  if (!eraserActive) return;
+  // Save state before starting erase
+  const ctx = baseCanvas.getContext('2d');
+  undoStack.push(ctx.getImageData(0, 0, W, H));
+  redoStack = [];
+
+  isErasing = true;
+  eraseAt(e.offsetX, e.offsetY);
+});
+
+overlay.addEventListener('mousemove', e => {
+  if (!isErasing || !eraserActive) return;
+  eraseAt(e.offsetX, e.offsetY);
+});
+
+overlay.addEventListener('mouseup', () => isErasing = false);
+overlay.addEventListener('mouseleave', () => isErasing = false);
+
+// === ERASE FUNCTION (paint white on baseCanvas) ===
+function eraseAt(x, y) {
+  const ctx = baseCanvas.getContext('2d');
+  ctx.save();
+  ctx.globalCompositeOperation = 'source-over';
+  ctx.fillStyle = 'white';
+  ctx.beginPath();
+  ctx.arc(x, y, eraserSize / 2, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.restore();
+}
+// === ZOOM FEATURE ===
+const zoomInBtn = document.getElementById('zoomInBtn');
+const zoomOutBtn = document.getElementById('zoomOutBtn');
+const zoomLevelLabel = document.getElementById('zoomLevel');
+
+let zoom = 1;
+const ZOOM_STEP = 0.1;
+const ZOOM_MIN = 0.2;
+const ZOOM_MAX = 5;
+
+// Helper: Apply zoom scaling
+function applyZoom() {
+  const canvases = [baseCanvas, overlayCanvas];
+  canvases.forEach(c => {
+    c.style.transformOrigin = "center center";
+    c.style.transform = `scale(${zoom})`;
+  });
+  zoomLevelLabel.textContent = Math.round(zoom * 100) + "%";
+}
+
+// Zoom in/out via buttons
+zoomInBtn.addEventListener('click', () => {
+  zoom = Math.min(zoom + ZOOM_STEP, ZOOM_MAX);
+  applyZoom();
+});
+
+zoomOutBtn.addEventListener('click', () => {
+  zoom = Math.max(zoom - ZOOM_STEP, ZOOM_MIN);
+  applyZoom();
+});
+
+// === Mouse wheel zoom ===
+viewer.addEventListener('wheel', e => {
+  e.preventDefault();
+  if (e.deltaY < 0) {
+    zoom = Math.min(zoom + ZOOM_STEP, ZOOM_MAX); // scroll up → zoom in
+  } else {
+    zoom = Math.max(zoom - ZOOM_STEP, ZOOM_MIN); // scroll down → zoom out
+  }
+  applyZoom();
+}, { passive: false });
+
+// === BACK TO UPLOAD PAGE ===
+document.getElementById("backBtn").addEventListener("click", () => {
+  document.getElementById("viewer").style.display = "none";
+  document.getElementById("uploadSection").style.display = "block";
+  document.getElementById("editTools").style.display = "none";
+  document.getElementById("zoomControls").style.display = "none";
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+// === Viewer Mode Controls ===
+function activateViewerMode() {
+  document.body.classList.add("viewer-active");
+}
+
+function deactivateViewerMode() {
+  document.body.classList.remove("viewer-active");
+  window.location.href = "/"; // or "/upload" if you have that route
+}
+// When the viewer page loads, activate viewer mode automatically:
+if (window.location.pathname.includes("/viewer")) {
+  activateViewerMode();
+}
+
+
+</script>
 </body>
 </html>
